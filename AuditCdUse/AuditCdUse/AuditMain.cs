@@ -38,43 +38,14 @@ namespace AuditCdUse
 
             // register async. event handler
             w.EventArrived += new EventArrivedEventHandler(am.CDREventArrived);
-            //w.Start();
+            //it was hanging up with start outside this loop and stop after it, I'll do more experimenting
+            //but currently, this works, and doesn't do anything crazy resource wise
             while (true)
             {
                 w.Start();
                 w.WaitForNextEvent();
                 w.Stop();
-            }
-
-            /*try
-            {
-                q = new WqlEventQuery();
-                q.EventClassName = "__InstanceModificationEvent";
-                q.WithinInterval = new TimeSpan(0, 0, 1);
-
-                // DriveType - 5: CDROM
-                q.Condition = @"TargetInstance ISA 'Win32_LogicalDisk' and
-            TargetInstance.DriveType = 5";
-                w = new ManagementEventWatcher(scope, q);
-
-                // register async. event handler
-                w.EventArrived += new EventArrivedEventHandler(am.CDREventArrived);
-                w.Start();
-
-                // Do something usefull,block thread for testing
-                Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                w.Stop();
-            }*/
-
-
-
+            }            
         }
 
         public void CDREventArrived(object sender, EventArrivedEventArgs e)

@@ -10,6 +10,8 @@ namespace AuditCdUse
 {
     class AuditMain
     {
+        MySqlConn con;
+
         static void Main(string[] args)
         {
             AuditMain am = new AuditMain();
@@ -64,6 +66,9 @@ namespace AuditCdUse
                 if (mbo.Properties["VolumeName"].Value != null)
                 {
                     Console.WriteLine("CD has been inserted");
+                    string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                    string machineName = Environment.MachineName;
+                    con.InsertCdEvent(machineName, userName);
                 }
                 else
                 {
@@ -72,7 +77,10 @@ namespace AuditCdUse
             }
         }
 
-
+        public AuditMain()
+        {
+            con = new MySqlConn();
+        }
 
     }
 }

@@ -86,6 +86,7 @@ namespace AuditCdUse
             { 
                 MySqlCommand cmd = new MySqlCommand(insert, connection);
                 cmd.ExecuteNonQuery();
+                this.CloseConnection();
                 return 1;
             }
             else

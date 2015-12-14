@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace AuditCdUse
 {
@@ -14,9 +16,13 @@ namespace AuditCdUse
     {
         MySqlConn con;
         ManualResetEvent mre;
+        static int should_exit = 0;
 
         static void Main(string[] args)
         {
+            //add an event handler for when a user shutdown down or logs off
+            SystemEvents.SessionEnding += Detect_Logout;
+
             AuditMain am = new AuditMain();
             ManagementEventWatcher w = null;
             WqlEventQuery q;
@@ -40,12 +46,15 @@ namespace AuditCdUse
             w.EventArrived += new EventArrivedEventHandler(am.CDREventArrived);
             //it was hanging up with start outside this loop and stop after it, I'll do more experimenting
             //but currently, this works, and doesn't do anything crazy resource wise
-            while (true)
+            
+            while (should_exit != 1)
             {
                 w.Start();
                 w.WaitForNextEvent();
                 w.Stop();
-            }            
+            }
+            
+            return;
         }
 
         public void CDREventArrived(object sender, EventArrivedEventArgs e)
@@ -64,10 +73,11 @@ namespace AuditCdUse
                     string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
                     string machineName = Environment.MachineName;
                     con.InsertCdEvent(machineName, userName);
+                    Debug.WriteLine("DB message sent");
                 }
                 else
                 {
-                    //Console.WriteLine("CD has been ejected");
+                    //Debug.WriteLine("CD has been ejected");
                 }
             }
         }
@@ -76,6 +86,11 @@ namespace AuditCdUse
         {
             con = new MySqlConn();
             mre = new ManualResetEvent(false);
+        }
+
+        private static void Detect_Logout(object sender, EventArgs e)
+        {
+            should_exit = 1;
         }
 
     }

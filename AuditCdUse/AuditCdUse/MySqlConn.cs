@@ -5,6 +5,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 
 namespace AuditCdUse
 {
@@ -53,11 +54,11 @@ namespace AuditCdUse
                 switch (ex.Number)
                 {
                     case 0:
-                        System.Diagnostics.Debug.WriteLine("Cannot connect to server.  Contact administrator");
+                        Debug.WriteLine("Cannot connect to server.  Contact administrator");
                         break;
 
                     case 1045:
-                        System.Diagnostics.Debug.WriteLine("Invalid username/password, please try again");
+                        Debug.WriteLine("Invalid username/password, please try again");
                         break;
                 }
                 return false;
@@ -88,6 +89,7 @@ namespace AuditCdUse
                 MySqlCommand cmd = new MySqlCommand(insert, connection);
                 cmd.ExecuteNonQuery();
                 this.CloseConnection();
+                Debug.WriteLine("INSERT SENT");
                 return 1;
             }
             else

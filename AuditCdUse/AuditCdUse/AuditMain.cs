@@ -35,9 +35,13 @@ namespace AuditCdUse
                         if(drive.VolumeLabel != lastTitle)
                         {
                             lastTitle = drive.VolumeLabel;
-                            string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                            string userName = System.Environment.UserName;
                             string machineName = Environment.MachineName;
                             connection.InsertCdEvent(machineName, userName);
+                        }
+                        else
+                        {
+                            Debug.WriteLine("no change to CD");
                         }
                     }
                     else

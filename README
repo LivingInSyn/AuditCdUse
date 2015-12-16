@@ -1,0 +1,6 @@
+This program monitors the CD-rom and on the insertion of a new CD, sends an update to a MariaDB/MySql database.
+
+The idea is to monitor how often the CD-Rom is being used, to find out if my company should stop buying machines
+with CD-ROM drives
+
+Eventually, a simple GUI will be built to query the database, right now you'd have to do it manually.

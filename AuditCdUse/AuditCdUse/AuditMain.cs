@@ -32,7 +32,8 @@ namespace AuditCdUse
                 {
                     if(drive.IsReady)
                     {
-                        if(drive.VolumeLabel != lastTitle)
+                        
+                        if (drive.VolumeLabel != lastTitle)
                         {
                             lastTitle = drive.VolumeLabel;
                             string userName = System.Environment.UserName;

@@ -16,6 +16,7 @@ namespace AuditCdUse
         private string database;
         private string uid;
         private string password;
+        private string connectionString;
 
         private void Init()
         {
@@ -23,7 +24,7 @@ namespace AuditCdUse
             database = "cddb";
             uid = "cddbUser";
             password = "uwmbtlpup4ldHt7nzA76";
-            string connectionString;
+            //string connectionString;
 
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
                                 database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -42,6 +43,13 @@ namespace AuditCdUse
             try
             {
                 connection.Open();
+
+                if(connection.State != System.Data.ConnectionState.Open)
+                {
+                    connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                }
+
                 return true;
             }
             catch (MySqlException ex)
@@ -59,6 +67,9 @@ namespace AuditCdUse
 
                     case 1045:
                         Debug.WriteLine("Invalid username/password, please try again");
+                        break;
+                    case 1042:
+                        Debug.WriteLine("Cannot contact the MySQL host");
                         break;
                 }
                 return false;

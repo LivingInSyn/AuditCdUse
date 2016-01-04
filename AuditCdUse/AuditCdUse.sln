@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditCdUse", "AuditCdUse\AuditCdUse.csproj", "{A978D554-C91F-48B0-ABD8-36FF10A87479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditCdInstaller", "AuditCdInstaller\AuditCdInstaller.csproj", "{78130160-4B6C-41AC-A17B-F3268CA2FBA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uninstall", "Uninstall\Uninstall.csproj", "{1BEF1FE0-27A1-45BD-9ED3-448DF2C4CEAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A978D554-C91F-48B0-ABD8-36FF10A87479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A978D554-C91F-48B0-ABD8-36FF10A87479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A978D554-C91F-48B0-ABD8-36FF10A87479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78130160-4B6C-41AC-A17B-F3268CA2FBA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78130160-4B6C-41AC-A17B-F3268CA2FBA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78130160-4B6C-41AC-A17B-F3268CA2FBA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78130160-4B6C-41AC-A17B-F3268CA2FBA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BEF1FE0-27A1-45BD-9ED3-448DF2C4CEAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BEF1FE0-27A1-45BD-9ED3-448DF2C4CEAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BEF1FE0-27A1-45BD-9ED3-448DF2C4CEAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BEF1FE0-27A1-45BD-9ED3-448DF2C4CEAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,6 +16,20 @@ namespace AuditCdInstaller
             string dir32 = @"C:\Program Files\AuditCdUse";
             string dir64 = @"C:\Program Files (x86)\AuditCdUse";
 
+            try
+            {
+                Process[] proc = Process.GetProcessesByName("AuditCdUse");
+                for (int i = 0; i < proc.Length; i++)
+                {
+                    proc[i].Kill();
+                }
+                System.Threading.Thread.Sleep(5000);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("process not running, continuing");
+            }
+
             //delete the old files
             if (Directory.Exists(dir64))
             {

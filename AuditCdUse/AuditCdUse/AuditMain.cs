@@ -26,19 +26,22 @@ namespace AuditCdUse
             AuditMain am = new AuditMain();
             
             string lastTitle = "";
+            bool firstRun = true;
+            Dictionary<string, string> cdTitles = new Dictionary<string, string>();
             while (should_exit == false)
             {
                 foreach (var drive in DriveInfo.GetDrives().Where(d => d.DriveType==DriveType.CDRom))
                 {
-                    if(drive.IsReady)
+                    if(firstRun == true) { cdTitles[drive.Name] = ""; }
+                    if (drive.IsReady)
                     {
-                        
-                        if (drive.VolumeLabel != lastTitle)
+                        if (drive.VolumeLabel != cdTitles[drive.Name])
                         {
+                            cdTitles[drive.Name] = drive.VolumeLabel;
                             lastTitle = drive.VolumeLabel;
                             string userName = System.Environment.UserName;
                             string machineName = Environment.MachineName;
-                            connection.InsertCdEvent(machineName, userName);
+                            connection.InsertCdEvent(machineName, userName, lastTitle);
                         }
                         else
                         {
@@ -50,6 +53,7 @@ namespace AuditCdUse
                         Debug.WriteLine("drive not ready");
                     }
                 }
+                firstRun = false;
                 Thread.Sleep(5000);
             }
             

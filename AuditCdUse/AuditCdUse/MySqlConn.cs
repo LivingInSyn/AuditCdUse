@@ -90,11 +90,12 @@ namespace AuditCdUse
             }
         }
 
-        public int InsertCdEvent(string machineName, string userName)
+        public int InsertCdEvent(string machineName, string userName, string cdTitle)
         {
             DateTime dateValue = DateTime.Now;
             string sqlDateString = dateValue.ToString("yyyy-MM-dd HH:mm:ss");
-            string insert = String.Format("INSERT INTO cddb.cd_events(MachineName, EventDateTime, UserName) VALUES('{0}','{1}','{2}')", machineName, sqlDateString, userName);
+            //string insert = String.Format("INSERT INTO cddb.cd_events_dev(MachineName, EventDateTime, UserName, CdTitle) VALUES('{0}','{1}','{2}','{3}')", machineName, sqlDateString, userName, cdTitle);
+            string insert = String.Format("INSERT INTO cddb.cd_events_dev(MachineName, EventDateTime, UserName) VALUES('{0}','{1}','{2}')", machineName, sqlDateString, userName, cdTitle);
             if (this.OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(insert, connection);
